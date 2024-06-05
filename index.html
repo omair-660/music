@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+    <div class="music">
+        <div class="container">
+            <img src="image/hero.jpg" alt="Album Art" class="img">
+            <audio id="audio" src="music/song.mp3"></audio>
+            <div class="line" id="progres-container">
+                <div class="progres"></div>
+                <span id="current-time">00:00</span>
+                <span id="duration">00:00</span>
+            </div>
+            <div class="details">
+                <p class="name"></p>
+            </div>
+            <div class="control">
+                <i class="fa-solid fa-repeat" id="repet"></i>
+                <i class="fa-solid fa-backward-step" id="prev"></i>
+                <i class="fa-solid fa-play" id="play"></i>
+                <i class="fa-solid fa-pause none" id="pause"></i>
+                <i class="fa-solid fa-forward-step" id="next"></i>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
