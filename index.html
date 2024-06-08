@@ -22,16 +22,23 @@
                 <div class="progres"></div>
                 <span id="current-time">00:00</span>
                 <span id="duration">00:00</span>
+                
+            </div>
+            <div id="volume-container">
+                <div class="volume-btn" id="volume-btn">
+                    <i class="fa fa-volume-up"></i>
+                </div>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
             </div>
             <div class="details">
                 <p class="name"></p>
             </div>
             <div class="control">
-                <i class="fa-solid fa-repeat" id="repet"></i>
-                <i class="fa-solid fa-backward-step" id="prev"></i>
-                <i class="fa-solid fa-play" id="play"></i>
-                <i class="fa-solid fa-pause none" id="pause"></i>
-                <i class="fa-solid fa-forward-step" id="next"></i>
+                <i class="fa-solid fa-repeat" id="repet" title="repeat all"></i>
+                <i class="fa-solid fa-backward-step" id="prev" title="previus"></i>
+                <i class="fa-solid fa-play" id="play" title="play"></i>
+                <i class="fa-solid fa-pause none" id="pause" title="pause"></i>
+                <i class="fa-solid fa-forward-step" id="next" title="next"></i>
             </div>
         </div>
     </div>

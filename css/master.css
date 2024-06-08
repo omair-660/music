@@ -110,4 +110,48 @@ i#repet {
 }
 .fw-bold{
     font-weight: bold;
+}#volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.volume-btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #f7f7f7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.volume-btn:hover {
+    background-color: #2f2f2f;
+}
+.volume-btn:hover i{
+
+    color: #f7f7f7;
+}
+.volume-btn i {
+    color: #2f2f2f;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+#volume {
+    width: 100px;
+}
+#volume {
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s, opacity 0.5s;
+}
+
+#volume-container:hover #volume {
+    width: 100px;
+    opacity: 1;
 }

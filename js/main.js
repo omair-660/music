@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let musicName = document.querySelector(".name");
     let progres = document.querySelector(".progres");
     let progresContainer = document.querySelector("#progres-container");
+    let volumeSlider = document.querySelector("#volume");
 
     let musicIndex = 0;
     let isPlay = false;
@@ -42,62 +43,61 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMusic(musicIndex);
     });
 
-    function loadMusic(i) {
-        musicName.innerHTML = songs[i].name;
-        musicImg.src = songs[i].img;
-        audio.src = songs[i].audio;
+    function loadMusic(index) {
+        musicName.innerHTML = songs[index].name;
+        musicImg.src = songs[index].img;
+        audio.src = songs[index].audio;
         audio.onloadedmetadata = () => {
             durationDisplay.innerHTML = formatTime(audio.duration);
         };
     }
 
-    function play() {
+    function playMusic() {
         isPlay = true;
         audio.play();
         pauseBtn.classList.remove("none");
         playBtn.classList.add("none");
     }
 
-    function pause() {
+    function pauseMusic() {
         isPlay = false;
         audio.pause();
         pauseBtn.classList.add("none");
         playBtn.classList.remove("none");
     }
 
-    playBtn.addEventListener("click", function () {
-        play();
-    });
-
-    pauseBtn.addEventListener("click", function () {
-        pause();
-    });
+    playBtn.addEventListener("click", playMusic);
+    pauseBtn.addEventListener("click", pauseMusic);
 
     function nextMusic() {
-        musicIndex++;
-        if (musicIndex >= songs.length) {
-            musicIndex = 0;
-        }
+        musicIndex = (musicIndex + 1) % songs.length;
         loadMusic(musicIndex);
-        play();
+        if (isPlay) playMusic();
     }
-
-    nextBtn.addEventListener("click", () => {
-        nextMusic();
-    });
 
     function prevMusic() {
-        musicIndex--;
-        if (musicIndex < 0) {
-            musicIndex = songs.length - 1;
-        }
+        musicIndex = (musicIndex - 1 + songs.length) % songs.length;
         loadMusic(musicIndex);
-        play();
+        if (isPlay) playMusic();
     }
 
-    prevBtn.addEventListener("click", () => {
-        prevMusic();
-    });
+    nextBtn.addEventListener("click", nextMusic);
+    prevBtn.addEventListener("click", prevMusic);
+
+    document.addEventListener("keydown",function (e) {
+    
+        if (e.key == "ArrowLeft") {
+            prevMusic()
+        }else if(e.key == "ArrowRight"){
+            nextMusic()
+        }else if (e.key === " ") {
+            if (isPlay) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        }
+    })
 
     audio.addEventListener("timeupdate", (e) => {
         let currentTime = e.target.currentTime;
@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${min}:${sec}`;
     }
 
-    // إضافة مستمع للحدث click على شريط التقدم
     progresContainer.addEventListener("click", (e) => {
         const width = progresContainer.clientWidth;
         const clickX = e.offsetX;
@@ -128,4 +127,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         audio.currentTime = (clickX / width) * duration;
     });
+
+    volumeSlider.addEventListener("input", (e) => {
+        audio.volume = e.target.value;
+    });
+
+    repetBtn.addEventListener("click", () => {
+        audio.addEventListener("ended", nextMusic);
+    });
+
+    let volumeBtn = document.querySelector("#volume-btn");
+
+    volumeBtn.addEventListener("click", () => {
+        if (audio.muted) {
+            audio.muted = false;
+            volumeBtn.innerHTML = '<i class="fa fa-volume-up"></i>';
+            volumeSlider.value = audio.volume;
+        } else {
+            audio.muted = true;
+            volumeBtn.innerHTML = '<i class="fa fa-volume-off"></i>';
+            volumeSlider.value = 0;
+        }
+    });
 });
+
